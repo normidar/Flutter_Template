@@ -1,2 +1,3 @@
 # Flutter_Template
- A Flutter Template
+
+This Template is included  easy_localization

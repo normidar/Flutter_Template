@@ -1,7 +1,20 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization_loader/easy_localization_loader.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('ja'), Locale('ja', 'JP')],
+      path:
+          'assets/translations', // <-- change the path of the translation files
+      fallbackLocale: const Locale('ja', 'JP'),
+      child: const MyApp(),
+      assetLoader: YamlAssetLoader(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +37,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: "test_str1".tr()),
     );
   }
 }
@@ -95,9 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            const Text('test_str2').tr(),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
